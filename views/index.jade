@@ -6,5 +6,9 @@ span.label=payingCards.length
         - each card in payingCards
           if card.suit == suit
            span.label=card.card
-a(href="/removeCard")!= "Remove Card"
-a(href="/removeTopCard")!= "Remove top Card"
+div
+    a(href="/removeCard")!= "Remove Card"
+div
+ a(href="/shuffleCard")!= "Shuffle Card"
+div
+ a(href="/removeTopCard")!= "Remove Top Card"
