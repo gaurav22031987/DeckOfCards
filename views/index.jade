@@ -1,0 +1,9 @@
+span.label=payingCards.length
+
+ #playingCards
+    -each suit in suites
+        h4.label=suit
+        - each card in payingCards
+          if card.suit == suit
+           span.label=card.card
+a(href="/removeCard")!= "Remove Card"
