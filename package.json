@@ -1,5 +1,5 @@
 {
-  "name": "deckofcardes6",
+  "name": "es6dummy",
   "version": "0.1.0",
   "description": "Deck of cards application with node express and es6",
   "scripts": {
