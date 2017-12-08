@@ -12,7 +12,7 @@ Node application to show deck of cards, using
 Clone the repository and run `npm install`
 
 ```
-git clone https://github.com/tomyitav/express-es6-starter.git
+https://github.com/gaurav22031987/DeckOfCards.git
 npm install
 ```
 
