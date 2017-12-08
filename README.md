@@ -1,6 +1,6 @@
 # Deck of cards with node express and ES6
 
-Starter project for creating a MVC express server, using
+Node application to show deck of cards, using
 
 + express
 + babel-cli
