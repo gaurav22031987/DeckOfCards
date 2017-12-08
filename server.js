@@ -14,7 +14,6 @@ logger.stream = {
     }
 };
 
-//connectToDb();
 
 const app = express();
 app.use(cors());
@@ -45,6 +44,15 @@ app.post('/removeCard', function (req, res) {
         suit: req.param('suite'),
         card: req.param('card')
     });
+    res.redirect('/');
+});
+app.get('/shuffleCard', function (req, res) {
+   deckControllerInstance.suffleCards();
+    res.redirect('/');
+});
+
+app.get('/removeTopCard', function (req, res) {
+   deckControllerInstance.removeTopCard();
     res.redirect('/');
 });
 

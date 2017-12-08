@@ -1,7 +1,4 @@
-import mongoose from 'mongoose';
 export default class CarsModel {
-    constructor() {
-    }
 
     deckCards = new Array();
 
@@ -38,7 +35,17 @@ export default class CarsModel {
             }
         }
     };
-
+    shuffleCards = () => {
+        for (var i = 0; i < this.deckCards.length; i++) {
+            var j = i;
+            while (j == i) {
+                j = Math.floor(Math.random() * this.deckCards.length);
+            }
+            var tmp = this.deckCards[i];
+            this.deckCards[i] = this.deckCards[j];
+            this.deckCards[j] = tmp;
+        }
+    }
     removeCardFromDeck = (cardInfomation) => {
         this.deckCards = this.deckCards.filter(function (obj) {
             return (obj.suit != cardInfomation.suit || obj.card != cardInfomation.card);
@@ -49,10 +56,17 @@ export default class CarsModel {
         return ['Heart', 'Diamond', 'Club', 'Spade'];
     };
 
+
+    remremoveTopCard = () => {
+        this.deckCards = this.deckCards.splice(0, 1);
+        console.log(this.deckCards);
+    };
+
     getAll = () => {
         if (!this.deckCards.length) {
             this.getData();
         }
         return this.deckCards;
     };
+
 }
