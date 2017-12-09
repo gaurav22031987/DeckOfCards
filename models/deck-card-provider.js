@@ -1,7 +1,7 @@
 export default class CarsModel {
 
     deckCards = [];
-
+    cardList = [];
     getData = () => {
         const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
         const suits = ['♥', '♦', '♣', '♠'];
@@ -14,24 +14,6 @@ export default class CarsModel {
             });
         });
     };
-
-    getTypeofCard = (number) => {
-        switch (number) {
-            case 11: {
-                return 'J';
-            }
-            case 12: {
-                return 'Q';
-            }
-            case 13: {
-                return 'K';
-            }
-            default: {
-                return 'A';
-            }
-        }
-    };
-
     shuffleCards = () => {
         for (let i = this.deckCards.length - 1; i > 0; i -= 1) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -51,7 +33,34 @@ export default class CarsModel {
     getAllSuite = () => {
         return ['♥', '♦', '♣', '♠'];
     };
+    getAllCards = () => {
+        const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
+        cards.forEach((card) => {
+            if ((card > 10) || card === 1) {
+                card = this.getTypeofCard(card);
+            }
+            this.cardList.push(card);
+        });
+        return this.cardList;
+    };
+
+    getTypeofCard = (number) => {
+        switch (number) {
+            case 11: {
+                return 'J';
+            }
+            case 12: {
+                return 'Q';
+            }
+            case 13: {
+                return 'K';
+            }
+            default: {
+                return 'A';
+            }
+        }
+    };
 
     remremoveTopCard = () => {
         this.deckCards.splice(this.deckCards.length - 1, 1);

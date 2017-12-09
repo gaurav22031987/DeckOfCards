@@ -14,7 +14,6 @@ export default class DeckCardController {
       logger.error(`Error in getting all cards- ${err}`);
     }
   }
-
   getAllSuite = () => {
     try {
       logger.info('getting all suites...');
@@ -23,6 +22,14 @@ export default class DeckCardController {
       logger.error(`Error in getting all cards- ${err}`);
     }
   }
+  getAllCards = () => {
+    try {
+      logger.info('getting all suites...');
+      return this.deckDataProviderInstance.getAllCards();
+    } catch (err) {
+      logger.error(`Error in getting all cards- ${err}`);
+    }
+  };
 
   suffleCards = () => {
     try {

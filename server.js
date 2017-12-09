@@ -37,6 +37,8 @@ app.get('/', (req, res) => {
 app.get('/removeCard', (req, res) => {
   res.render('remove_card', {
     title: 'Remove Card from Deck',
+    suits: deckControllerInstance.getAllSuite(),
+    cards: deckControllerInstance.getAllCards(),
   });
 });
 
