@@ -27,7 +27,7 @@ export default class CarsModel {
         this.deckCards = this.deckCards.filter((obj) => {
             return (obj.suit !== cardInfomation.suit || obj.card.toString() !== cardInfomation.card.toString());
         });
-        console.log(this.deckCards);
+        return this.deckCards;
     };
 
     getAllSuite = () => {
@@ -64,13 +64,14 @@ export default class CarsModel {
 
     remremoveTopCard = () => {
         this.deckCards.splice(this.deckCards.length - 1, 1);
-        console.log(this.deckCards);
+        return this.deckCards;
     };
 
-    getAll = () => {
-        if (!this.deckCards.length) {
+    getAll = (initialDeck) => {
+        if (initialDeck) {
             this.getData();
         }
+
         return this.deckCards;
     };
 

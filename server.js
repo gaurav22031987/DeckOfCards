@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import config from './core/config/config.dev';
 import logger from './core/logger/app-logger';
 import DeckCardController from './controllers/deckCardController';
-
+import url from 'url';
 const port = config.serverPort;
 const deckControllerInstance = new DeckCardController();
 logger.stream = {
@@ -28,9 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev', { stream: logger.stream }));
 
+let initialDeckCards = true;
 // Index route
 app.get('/', (req, res) => {
-  res.render('index', { payingCards: deckControllerInstance.getAll(), suites: deckControllerInstance.getAllSuite() });
+  res.render('index', { payingCards: deckControllerInstance.getAll(initialDeckCards), suites: deckControllerInstance.getAllSuite() });
 });
 
 // Remove Card from Deck
@@ -47,15 +48,23 @@ app.post('/removeCard', (req, res) => {
     suit: req.param('suite'),
     card: req.param('card'),
   });
+  initialDeckCards = false;
   res.redirect('/');
 });
 app.get('/shuffleCard', (req, res) => {
+  initialDeckCards = false;
   deckControllerInstance.suffleCards();
   res.redirect('/');
 });
 
+app.get('/newDeck', (req, res) => {
+  initialDeckCards = true;
+  res.redirect('/');
+});
+
 app.get('/removeTopCard', (req, res) => {
-  deckControllerInstance.removeTopCard();
+  const newDeck = deckControllerInstance.removeTopCard();
+  initialDeckCards = false;
   res.redirect('/');
 });
 

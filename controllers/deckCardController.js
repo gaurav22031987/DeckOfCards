@@ -6,10 +6,10 @@ export default class DeckCardController {
     this.deckDataProviderInstance = new DeckDataProvider();
   }
 
-  getAll = () => {
+  getAll = (initial) => {
     try {
       logger.info('getting all cards...');
-      return this.deckDataProviderInstance.getAll();
+      return this.deckDataProviderInstance.getAll(initial);
     } catch (err) {
       logger.error(`Error in getting all cards- ${err}`);
     }
