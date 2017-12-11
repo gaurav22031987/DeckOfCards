@@ -6,10 +6,19 @@ export default class DeckCardController {
     this.deckDataProviderInstance = new DeckDataProvider();
   }
 
-  getAll = (initial) => {
+  generateDeckofCards = () => {
     try {
       logger.info('getting all cards...');
-      return this.deckDataProviderInstance.getAll(initial);
+      return this.deckDataProviderInstance.generateDeckOfCards();
+    } catch (err) {
+      logger.error(`Error in getting all cards- ${err}`);
+    }
+  }
+
+  updatedDeckOfCards = () => {
+    try {
+      logger.info('getting all cards...');
+      return this.deckDataProviderInstance.getUpdatedDeckOfCards();
     } catch (err) {
       logger.error(`Error in getting all cards- ${err}`);
     }
@@ -52,7 +61,7 @@ export default class DeckCardController {
   removeTopCard = () => {
     try {
       logger.info('removing Top Card');
-      return this.deckDataProviderInstance.remremoveTopCard();
+      this.deckDataProviderInstance.remremoveTopCard();
     } catch (err) {
       logger.error(`Error in getting removing top card- ${err}`);
     }

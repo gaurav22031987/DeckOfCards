@@ -28,10 +28,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev', { stream: logger.stream }));
 
-let initialDeckCards = true;
 // Index route
 app.get('/', (req, res) => {
-  res.render('index', { payingCards: deckControllerInstance.getAll(initialDeckCards), suites: deckControllerInstance.getAllSuite() });
+  res.render('index', { payingCards: [], suites: deckControllerInstance.getAllSuite() });
 });
 
 // Remove Card from Deck
@@ -43,29 +42,33 @@ app.get('/removeCard', (req, res) => {
   });
 });
 
+app.get('/generateDeck', (req, res) => {
+  res.render('index', { payingCards: deckControllerInstance.generateDeckofCards(), suites: deckControllerInstance.getAllSuite() });
+});
+
+app.get('/updatedDeck', (req, res) => {
+  res.render('index', { payingCards: deckControllerInstance.updatedDeckOfCards(), suites: deckControllerInstance.getAllSuite() });
+});
+
 app.post('/removeCard', (req, res) => {
   deckControllerInstance.removeCardFromDeck({
     suit: req.param('suite'),
     card: req.param('card'),
   });
-  initialDeckCards = false;
-  res.redirect('/');
+  res.redirect('/updatedDeck');
 });
 app.get('/shuffleCard', (req, res) => {
-  initialDeckCards = false;
   deckControllerInstance.suffleCards();
-  res.redirect('/');
+  res.redirect('/updatedDeck');
 });
 
 app.get('/newDeck', (req, res) => {
-  initialDeckCards = true;
-  res.redirect('/');
+  res.redirect('/generateDeck');
 });
 
 app.get('/removeTopCard', (req, res) => {
-  const newDeck = deckControllerInstance.removeTopCard();
-  initialDeckCards = false;
-  res.redirect('/');
+  deckControllerInstance.removeTopCard();
+  res.redirect('/updatedDeck');
 });
 
 app.listen(port, () => {

@@ -64,14 +64,15 @@ export default class CarsModel {
 
     remremoveTopCard = () => {
         this.deckCards.splice(this.deckCards.length - 1, 1);
-        return this.deckCards;
     };
 
-    getAll = (initialDeck) => {
-        if (initialDeck) {
-            this.getData();
-        }
+    getUpdatedDeckOfCards = () => {
+        return this.deckCards;
+    }
 
+
+    generateDeckOfCards = () => {
+        this.getData();
         return this.deckCards;
     };
 
