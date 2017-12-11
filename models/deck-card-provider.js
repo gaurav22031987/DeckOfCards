@@ -72,7 +72,9 @@ export default class CarsModel {
 
 
     generateDeckOfCards = () => {
-        this.getData();
+        if (!this.deckCards.length) {
+            this.getData();
+        }
         return this.deckCards;
     };
 

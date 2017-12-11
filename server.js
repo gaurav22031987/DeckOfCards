@@ -6,7 +6,6 @@ import morgan from 'morgan';
 import config from './core/config/config.dev';
 import logger from './core/logger/app-logger';
 import DeckCardController from './controllers/deckCardController';
-import url from 'url';
 const port = config.serverPort;
 const deckControllerInstance = new DeckCardController();
 logger.stream = {
